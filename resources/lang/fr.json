@@ -2,5 +2,14 @@
 	"About" : "A Propos",
 	"Help" : "Aide",
 	"English" : "Anglais",
-	"French" : "Français"
+	"French" : "Français",
+	"Real Estate adverts" : "Toutes les annonces",
+
+	"Create an advert" : "créer une annonce",
+	"Advert reference" : "Référence",
+	"Advert price" : "Prix",
+	"Area" : "Surface",
+
+	"Number of rooms" : "Nombre de pièces",
+	"Actions" : "Actions"	
 }

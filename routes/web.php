@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/lang/{locale}', 'App\Http\Controllers\LocalizationController@index');
+
+Route::resource('/annonce', 'App\Http\Controllers\AnnonceController');
