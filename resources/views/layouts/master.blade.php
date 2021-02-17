@@ -41,7 +41,7 @@
             <div class="menu">
             @include('layouts/partials/_menu')
             </div>
-            <div class="content">
+            <div class="container">
                 @yield('content')
             </div>
         </div>

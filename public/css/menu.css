@@ -191,4 +191,14 @@
         border-radius: 0 0 3px 3px;
 }
 
+#menu li#lang-selector {
+    float: right;
+}
 
+#lang-selector a {
+    padding: 0px 20px;
+}
+
+#lang-selector a img{
+    height: 25px;
+}
