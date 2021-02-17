@@ -27,7 +27,8 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        //
+        // load the create form (app/views/annonce/create.blade.php)
+        return \View::make('annonce.create');
     }
 
     /**
@@ -38,41 +39,107 @@ class AnnonceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $entity = new Annonce();
+        
+        // array of validation rules
+        $rules = [
+            "ref_annonce" => ["required", "string", "max:20"],
+            "prix_annonce" => ["numeric"],
+            "surface_habitable" => ["numeric"],
+            "nombre_de_piece" => ["integer"],
+        ];
+
+        $params = $request->all();
+        unset($params['_token']);
+        $validator = \Validator::make($params, $rules);
+
+        if ($validator->fails()) {
+            return \Redirect::to('annonce/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        // store
+        $entity->forceFill($validator->valid());
+        $entity->timestamps = false;
+        
+        $entity->save();
+
+        // redirect
+        \Session::flash('message', 'Successfully created annonce!');
+        return \Redirect::to('annonce');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Annonce  $entity
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        // get the annonce
+        $entity = Annonce::find($id);
+
+        // show the view and pass the annonce to it
+        return \View::make('annonce.show')
+            ->with('annonce', $entity);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Annonce  $entity
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        
+        // get the annonce
+        $entity = Annonce::find($id);
+
+        $data = [
+            'entity' => $entity
+        ];
+
+        // show the edit form and pass the annonce
+        return \View::make('annonce.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $entity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $entityId)
     {
-        //
+        $entity = Annonce::find($entityId);
+
+        // array of validation rules
+        $rules = [
+            "ref_annonce" => ["required", "string", "max:20"],
+            "prix_annonce" => ["numeric"],
+            "surface_habitable" => ["numeric"],
+            "nombre_de_piece" => ["integer"],
+        ];
+
+        $validatedData = $request->validate($rules);
+        
+        // process the login
+        if ($validatedData) {
+            // store
+            $entity->forceFill($validatedData);
+            $entity->timestamps = false;
+            
+            $entity->save();
+
+            // redirect
+            \Session::flash('message', 'Successfully updated annonce!');
+            return \Redirect::to('annonce');
+        }
     }
 
     /**
@@ -81,8 +148,16 @@ class AnnonceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        // delete
+        $entity = Annonce::find($id);
+
+        $entity->delete();
+
+        // redirect
+        \Session::flash('message', 'Successfully deleted the annonce!');
+        return \Redirect::to('annonce');
     }
+
 }

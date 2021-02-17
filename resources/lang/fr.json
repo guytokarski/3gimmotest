@@ -11,5 +11,8 @@
 	"Area" : "Surface",
 
 	"Number of rooms" : "Nombre de pièces",
-	"Actions" : "Actions"	
+	"Actions" : "Actions",	
+
+	"Edit" : "Modifier",
+	"Submit" : "Appliquer"
 }

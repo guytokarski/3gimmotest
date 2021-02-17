@@ -14,7 +14,7 @@
                             <a href="{{ URL::to('annonce') }}">list</a>
                         </li>
                         <li>
-                            <a href="{{ URL::to('annonce/list') }}">create</a>
+                            <a href="{{ URL::to('annonce/create') }}">create</a>
                         </li>
                     </ul>
                 </li>
